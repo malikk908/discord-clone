@@ -42,9 +42,7 @@ export const EditServerModal = () => {
 
   const { type, isOpen, onClose, data } = useModal()
 
-  const { server } = data
- 
-
+  const { server } = data 
 
   const router = useRouter();
 
@@ -58,7 +56,7 @@ export const EditServerModal = () => {
       imageUrl: '',
     }
   });
- 
+
 
   useEffect(() => {
     if (server) {
@@ -66,6 +64,7 @@ export const EditServerModal = () => {
       form.setValue("imageUrl", server.imageUrl);
     }
   }, [server, form]);
+
 
   const isLoading = form.formState.isSubmitting;
 
