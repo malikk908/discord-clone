@@ -8,7 +8,6 @@ import { useModal } from "@/hooks/use-modal-store";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -36,6 +35,7 @@ import axios from 'axios';
 import { ChannelType } from "@prisma/client";
 import qs from "query-string";
 import { useParams } from "next/navigation";
+import { useEffect } from "react";
 
 
 const formSchema = z.object({
@@ -49,7 +49,9 @@ const formSchema = z.object({
 
 export const CreateChannelModal = () => {
 
-  const { type, isOpen, onClose } = useModal()
+  const { type, isOpen, onClose, data } = useModal()
+
+  const { channelType } = data
 
   const router = useRouter();
   const params = useParams();
@@ -61,9 +63,18 @@ export const CreateChannelModal = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
-      type: ChannelType.TEXT,
+      type: channelType || ChannelType.TEXT,
     }
   });
+
+  
+  useEffect(() => {
+    if (channelType) {
+      form.setValue("type", channelType);
+    } else {
+      form.setValue("type", ChannelType.TEXT);
+    }
+  }, [channelType, form]);
 
   const isLoading = form.formState.isSubmitting;
 

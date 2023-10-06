@@ -9,11 +9,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Label } from "../ui/label";
-import { Input } from "@/components/ui/input";
+
 import { Button } from "@/components/ui/button";
-import { useOrigin } from "@/hooks/use-origin";
-import { Check, Copy, RefreshCw } from "lucide-react";
 import { useState } from "react";
 import axios from "axios";
 import { DialogDescription } from "@radix-ui/react-dialog";
@@ -25,7 +22,7 @@ export const LeaveServerModal = () => {
 
   const [isLoading, setIsLoading] = useState(false)
 
-  const { type, isOpen, onClose, onOpen, data } = useModal()
+  const { type, isOpen, onClose, data } = useModal()
 
   const { server } = data
 
