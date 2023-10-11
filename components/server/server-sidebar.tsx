@@ -145,6 +145,8 @@ export const ServerSidebar = async ({
                             return <ServerChannels
                                 key={channel.id}
                                 channel={channel}
+                                server={server}
+                                role={role}
                                 icon={iconMap[channel.type]}
                                 name={channel.name} />
                         })}
@@ -168,6 +170,7 @@ export const ServerSidebar = async ({
                             return <ServerChannels
                                 key={channel.id}
                                 channel={channel}
+                                server={server}
                                 icon={iconMap[channel.type]}
                                 name={channel.name} />
                         })}
@@ -191,6 +194,7 @@ export const ServerSidebar = async ({
                             return <ServerChannels
                                 key={channel.id}
                                 channel={channel}
+                                server={server}
                                 icon={iconMap[channel.type]}
                                 name={channel.name} />
                         })}

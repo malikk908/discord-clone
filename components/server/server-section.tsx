@@ -25,7 +25,7 @@ export const ServerSection = ({
 }: ServerSectionProps) => {
 
     const { onOpen } = useModal()
-
+    
 
     return (
         <div className="flex items-center justify-between p-2">
