@@ -1,9 +1,7 @@
 import { NextResponse } from "next/server";
-
 import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
 import { MemberRole } from "@prisma/client";
-import { channel } from "diagnostics_channel";
 
 export async function PATCH(req: Request,
     { params }: { params: { channelId: string } }) {
