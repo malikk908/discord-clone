@@ -4,7 +4,7 @@ import { ChannelType, MemberRole } from "@prisma/client";
 import { ActionTooltip } from "../action-tooltip";
 import { Plus, Settings } from "lucide-react";
 import { useModal } from "@/hooks/use-modal-store";
-import { ServerWithMembersWithProfiles } from "@/type";
+import { ServerWithMembersWithProfiles } from "@/types";
 
 
 interface ServerSectionProps {

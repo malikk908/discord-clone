@@ -14,7 +14,7 @@ import { Check, Gavel, Loader2, MoreVertical, Shield, ShieldAlert, ShieldCheck, 
 import { useState } from "react";
 import axios from "axios";
 
-import { ServerWithMembersWithProfiles } from "@/type";
+import { ServerWithMembersWithProfiles } from "@/types";
 import { ScrollArea } from "../ui/scroll-area";
 import { UserAvatar } from "../user-avatar";
 import {
