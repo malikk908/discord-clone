@@ -70,7 +70,7 @@ const ChannelIdPage = async ({
         }}
         type="channel"
         name={channel.name} />
-
+        
     </div>
   );
 }
