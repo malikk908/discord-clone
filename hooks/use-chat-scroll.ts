@@ -1,79 +1,88 @@
 import { useEffect, useState } from "react"
 
 type ChatScrollProps = {
-    chatRef: React.RefObject<HTMLDivElement>
-    bottomRef: React.RefObject<HTMLDivElement>
-    shouldLoadMore: boolean
-    loadMore: () => void
-    count: number
+  chatRef: React.RefObject<HTMLDivElement>
+  bottomRef: React.RefObject<HTMLDivElement>
+  shouldLoadMore: boolean
+  loadMore: () => void
+  count: number
 }
 
 export const useChatScroll = ({
-    chatRef,
-    bottomRef,
-    shouldLoadMore,
-    loadMore,
-    count,
+  chatRef,
+  bottomRef,
+  shouldLoadMore,
+  loadMore,
+  count,
 }: ChatScrollProps) => {
 
-    const [hasInitialized, setHasInitialized] = useState(false);
-    
+  const [hasInitialized, setHasInitialized] = useState(false);
 
-    useEffect(()=> {
 
-        const topDiv = chatRef?.current        
-        
-        const handleScroll = () => {
-            const scrollTop = topDiv?.scrollTop;
+  useEffect(() => {
 
-            if(topDiv){
+    const topDiv = chatRef?.current
+    let prevScrollHeight = topDiv?.scrollHeight;
 
-                if(scrollTop === 0 && shouldLoadMore) {
-                    loadMore()
-                    topDiv.scrollTop = 1
-                }
-            }            
+
+    const handleScroll = () => {
+      const scrollTop = topDiv?.scrollTop;
+      
+
+      if (topDiv) {
+
+        if (scrollTop === 0 && shouldLoadMore) {
+          loadMore()         
+
+          
         }
-        
-
-        topDiv?.addEventListener("scroll", handleScroll)
-        
-        
-
-        return () => {
-            topDiv?.removeEventListener("scroll", handleScroll)
-        }
-
-    }, [shouldLoadMore, chatRef, loadMore])
+      }
+    }
 
 
+    topDiv?.addEventListener("scroll", handleScroll)
 
-    useEffect(() => {
-        const bottomDiv = bottomRef?.current;
-        const topDiv = chatRef.current;
-        const shouldAutoScroll = () => {
-          if (!hasInitialized && bottomDiv) {
-            setHasInitialized(true);
-            return true;
-          }
-    
-          if (!topDiv) {
-            return false;
-          }
-    
-          const distanceFromBottom = topDiv.scrollHeight - topDiv.scrollTop - topDiv.clientHeight;
-          return distanceFromBottom <= 200;
-        }
-    
-        if (shouldAutoScroll()) {
-          setTimeout(() => {
-            bottomRef.current?.scrollIntoView({
-              behavior: "smooth",
-            });
-          }, 100);
-        }
-      }, [bottomRef, chatRef, count, hasInitialized]);
-    
+
+    return () => {
+      topDiv?.removeEventListener("scroll", handleScroll)
+
+      if (prevScrollHeight !== null && topDiv && prevScrollHeight) {
+        topDiv.scrollTop = topDiv.scrollHeight - prevScrollHeight;
+        prevScrollHeight = undefined;
+    }
+
+    }
+
+  }, [shouldLoadMore, chatRef, loadMore])
+
+
+
+  useEffect(() => {
+    const bottomDiv = bottomRef?.current;
+    const topDiv = chatRef.current;
+    const shouldAutoScroll = () => {
+      if (!hasInitialized && bottomDiv) {
+        setHasInitialized(true);
+        return true;
+      }
+
+      if (!topDiv) {
+        return false;
+      }
+
+      const distanceFromBottom = topDiv.scrollHeight - topDiv.scrollTop - topDiv.clientHeight;
+      return distanceFromBottom <= 200;
+    }
+
+    if (shouldAutoScroll()) {
+      setTimeout(() => {
+        bottomRef.current?.scrollIntoView({
+          behavior: "smooth",
+        });
+      }, 100);
+    }
+  }, [bottomRef, chatRef, count, hasInitialized]);
+
 
 }
 

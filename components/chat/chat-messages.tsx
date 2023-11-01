@@ -64,19 +64,7 @@ export const ChatMessages = ({
         paramKey,
         paramValue,
     });
-
-    // const chatContainer = chatRef.current;
-
-    // // Get the current scroll position
-    // const scrollPosition = chatContainer ? chatContainer.scrollTop : 0;
-
-    // useEffect(() => {
-    //     if (chatContainer) {
-    //       chatContainer.scrollTop = scrollPosition;
-    //       console.log(chatContainer.scrollTop)
-    //       console.log(scrollPosition)
-    //     }
-    //   }, [data]);
+ 
   
 
     useChatSocket({ addKey, updateKey, queryKey })
